@@ -8,6 +8,32 @@ port = 5000
 def home():
         return render_template("home.html")
 
+@app.route("/movies", methods=["GET"])
+def list_of_movies():
+        try:
+                movies = db.session.query(Movie)..all()
+
+                print(movies)
+                movies_data = []
+                for (movie) in movies:
+                        movie_data = {
+                                'id_movie': movie.id_movie,
+                                'title': movie.title,
+                                'genre': movie.genre,
+                                'adult': movie.adult,
+                                'budget': movie.budget,
+                                'origin_country': movie.origin_country,
+                                'release_date': movie.release_date,
+                                'revenue': movie.revenue,
+                                'runtime': movie.runtime,
+                        }
+                        movies_data.append(movie_data)
+                return jsonify(movies_data)
+        except Exception as error:
+                print('Error', error)
+                return jsonify({'message': 'There are no movies available...'}), 500
+
+
 @app.route("/movies/<id_movie>/reviews", methods=["GET"])
 def reviews_of_a_movie(id_movie):
         try:
@@ -33,6 +59,7 @@ def reviews_of_a_movie(id_movie):
 def new_review(id_movie):
         try:
                 data = request.json
+
                 
 
 
