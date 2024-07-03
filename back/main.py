@@ -1,17 +1,23 @@
 from flask import Flask, render_template, request, jsonify, session, current_app, redirect
-from movies_and_reviews import db, Movie, Review
+from movies_and_reviews import db, app, Movie, Review
 
-app = Flask(__name__)
 port = 5000
 
 @app.route("/")
 def home():
-        return render_template("home.html")
+        return """
+        <html>
+        <body>
+        <h1>Welcome to my movies API</h1>
+        <a href="/movies">Go to all movies</a>
+        </body>
+        </html>
+        """
 
 @app.route("/movies", methods=["GET"])
 def list_of_movies():
         try:
-                movies = db.session.query(Movie)..all()
+                movies = db.session.query(Movie).all()
 
                 print(movies)
                 movies_data = []
