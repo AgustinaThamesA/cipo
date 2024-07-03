@@ -55,10 +55,30 @@ def reviews_of_a_movie(id_movie):
                 print('Error', error)
                 return jsonify({'message': 'There are no reviews on this movie...'}), 500
 
-@app.route("/movies/<id_movie>/new_review", methods=["POST"])
-def new_review(id_movie):
+@app.route("/movies/<genre>", methods=["GET"])
+def movies_by_genre(genre):
         try:
-                data = request.json
+                movies_by_genre = db.session.query(Movie).filter(Movie.genre == genre).all()
+
+                print(revmovies_by_genreiews)
+                movies_by_genre_data = []
+                for (movie_by_genre_data) in movies_by_genre_data:
+                        movie_by_genre_data = {
+                                'id_movie': movie_by_genre_data.id_movie,
+                                'title': movie_by_genre_data.title,
+                                'genre': movie_by_genre_data.genre,
+                                'adult': movie_by_genre_data.adult,
+                                'budget': movie_by_genre_data.budget,
+                                'origin_country': movie_by_genre_data.origin_country,
+                                'release_date': movie_by_genre_data.release_date,
+                                'revenue': movie_by_genre_data.revenue,
+                                'runtime': movie_by_genre_data.runtime,
+                        }
+                        movies_by_genre_data.append(movie_by_genre_data)
+                return jsonify(movies_by_genre_data)
+        except Exception as error:
+                print('Error', error)
+                return jsonify({'message': 'There are no movies with this genre...'}), 500
 
                 
 
