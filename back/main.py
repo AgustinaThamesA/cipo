@@ -39,7 +39,6 @@ def list_of_movies():
                 print('Error', error)
                 return jsonify({'message': 'There are no movies available...'}), 500
 
-
 @app.route("/movies/<id_movie>/reviews", methods=["GET"])
 def reviews_of_a_movie(id_movie):
         try:
@@ -61,10 +60,10 @@ def reviews_of_a_movie(id_movie):
                 print('Error', error)
                 return jsonify({'message': 'There are no reviews on this movie...'}), 500
 
-@app.route("/movies/drama", methods=["GET"])
-def movies_by_genre():
+@app.route("/movies/<genre>", methods=["GET"])
+def movies_by_genre(genre):
     try:
-        movies_by_genre = db.session.query(Movie).filter(Movie.genre == 'Drama').all()
+        movies_by_genre = db.session.query(Movie).filter(Movie.genre == genre).all()
 
         print(movies_by_genre)
         movies_by_genre_data = []
