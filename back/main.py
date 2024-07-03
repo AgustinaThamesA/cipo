@@ -80,6 +80,22 @@ def movies_by_genre(genre):
                 print('Error', error)
                 return jsonify({'message': 'There are no movies with this genre...'}), 500
 
+@app.route("/movies/<id_movie>/new_review", methods=["POST"])
+def create_new_review(id_movie):
+    try:
+        data = request.json
+        new_review = Review(
+            id_movie=id_movie,
+            comments=data['comments'],
+            score=data['score'],
+            reviewer_name=data['reviewer_name']
+        )
+        db.session.add(new_review)
+        db.session.commit()
+        return jsonify({"message": "Review added successfully!"}), 200
+    except Exception as error:
+        print('Error:', error)
+        return jsonify({"message": "An error occurred while adding the review."}), 500
                 
 
 
