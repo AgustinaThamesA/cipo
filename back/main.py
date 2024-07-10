@@ -102,8 +102,22 @@ def create_new_review(id_movie):
     except Exception as error:
         print('Error:', error)
         return jsonify({"message": "An error occurred while adding the review."}), 500
-                
 
+        
+                
+@app.route("/movies/<id_movie>/reviews/<id_review>", methods=["DELETE"])
+def delete_review(id_movie, id_review):
+    try:
+        review = db.session.query(Review).filter(Review.id_movie == id_movie, Review.id_review == id_review).first()
+        if review:
+            db.session.delete(review)
+            db.session.commit()
+            return jsonify({"message": "Review deleted successfully!"}), 200
+        else:
+            return jsonify({"message": "Review not found."}), 404
+    except Exception as error:
+        print('Error:', error)
+        return jsonify({"message": "An error occurred while deleting the review."}), 500
 
 
 if __name__ == '__main__':
