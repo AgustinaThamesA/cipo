@@ -2,12 +2,15 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 from dotenv import load_dotenv
+from flask_cors import CORS
 
 load_dotenv()  # Cargar variables de entorno desde el archivo .env
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+CORS(app)
 
 db = SQLAlchemy(app)
 
