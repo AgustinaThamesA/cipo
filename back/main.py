@@ -66,7 +66,7 @@ def movies_by_genre(genre):
         try:
                 movies_by_genre = db.session.query(Movie).filter(Movie.genre == genre).all()
 
-                print(revmovies_by_genreiews)
+                print(movies_by_genre)
                 movies_by_genre_data = []
                 for (movie_by_genre_data) in movies_by_genre_data:
                         movie_by_genre_data = {
