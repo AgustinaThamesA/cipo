@@ -102,9 +102,40 @@ def create_new_review(id_movie):
     except Exception as error:
         print('Error:', error)
         return jsonify({"message": "An error occurred while adding the review."}), 500
+
+        
                 
+@app.route("/movies/<id_movie>/reviews/<id_review>", methods=["DELETE"])
+def delete_review(id_movie, id_review):
+    try:
+        review = db.session.query(Review).filter(Review.id_movie == id_movie, Review.id_review == id_review).first()
+        if review:
+            db.session.delete(review)
+            db.session.commit()
+            return jsonify({"message": "Review deleted successfully!"}), 200
+        else:
+            return jsonify({"message": "Review not found."}), 404
+    except Exception as error:
+        print('Error:', error)
+        return jsonify({"message": "An error occurred while deleting the review."}), 500
 
 
+@app.route("/movies/<id_movie>/reviews/<id_review>", methods=["PUT"])
+def update_review(id_movie, id_review):
+    try:
+        data = request.json
+        review = db.session.query(Review).filter(Review.id_movie == id_movie, Review.id_review == id_review).first()
+        if review:
+            review.comments = data.get('comments', review.comments)
+            review.score = data.get('score', review.score)
+            review.reviewer_name = data.get('reviewer_name', review.reviewer_name)
+            db.session.commit()
+            return jsonify({"message": "Review updated successfully!"}), 200
+        else:
+            return jsonify({"message": "Review not found."}), 404
+    except Exception as error:
+        print('Error:', error)
+        return jsonify({"message": "An error occurred while updating the review."}), 500
 
 if __name__ == '__main__':
         app.run(host='0.0.0.0', debug=True, port=port)
