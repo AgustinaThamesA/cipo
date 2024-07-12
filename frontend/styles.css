@@ -1,0 +1,53 @@
+
+.container{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px;
+    border: 0.5px solid #edebeb;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+a {
+    font-family: cursive;
+    color: rgb(46, 46, 14);
+    text-decoration-color: #edebeb;
+}
+.select-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+select {
+    padding: 5px;
+    border: 0.5px solid #edebeb;
+    border-radius: 5px;
+    color: rgb(46, 46, 14);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: cursive;
+    background-color: transparent;
+}
+
+select:focus {
+    background-color: transparent;
+    outline: none;
+    color: rgb(46, 46, 14)
+}
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: URL(https://st3.depositphotos.com/2130737/15041/i/450/depositphotos_150414820-stock-photo-background-and-texture-of-fabric.jpg);
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    text-align: center;
+    color: rgb(46, 46, 14);
+    font-family: cursive;
+}
