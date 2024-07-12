@@ -22,7 +22,7 @@
     </div>
     <style>
         h1 {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-family: cursive;
             text-align: center;
             color: rgb(130, 130, 23);
             font-size: 30px;
@@ -33,6 +33,14 @@
         crossorigin="anonymous"></script>
     <script>
         
+        const params = new URLSearchParams(window.location.search);
+        const id_movie = params.get("id_movie");
+
+        if (id_movie === null) {
+            console.log("This movie is not available");
+            
+        }
+
         function data_received(data) {
             return data.text()
         }
