@@ -12,61 +12,7 @@
         <h1>Welcome to IntroMovies</h1>
     </div>
     <div class="container">
-        <a id="go">Go to all movies</a>
+        <a href="/all_movies/index.html">Go to all movies</a>
     </div>
-    <div class="select-container">
-        <select id="genre"></select>
-    </div>
-
-    <script>
-        const go = document.getElementById("go");
-        go.setAttribute("href", `/frontend/home/`);
-        
-        function data_received(data) {
-            return data.text()
-        }
-        function parse_data(content) {
-            console.log(content)
-        }
-        function request_error(error) {
-            console.log("Error", error)
-        }
-        fetch("http://localhost:5000/")
-            .then(data_received)
-            .then(parse_data)
-            .catch(request_error)
-
-
-        
-        const params = new URLSearchParams(window.location.search);
-        const genre = params.get("genre");
-        if (genre === null) {
-            console.log("There are no movies with this genre");
-        }
-
-        function response_received(response) {
-            return response.json()
-        }
-
-        function movies_genre(genres) {
-            const select = document.getElementById("genre");
-            genres.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item.genre;
-                option.textContent = item.genre;
-                select.appendChild(option);
-            });
-        }
-
-
-        function handle_error(error){
-            console.log("Error", error)
-        }
-
-        fetch(`http://localhost:5000/movies/${genre}`)
-            .then(response_received)
-            .then(movies_genre)
-            .catch(handle_error)
-    </script>
 </body>
 </html>
