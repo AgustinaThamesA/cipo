@@ -25,6 +25,7 @@ class Movie(db.Model):
     release_date = db.Column(db.Date, nullable=False)
     revenue = db.Column(db.Integer)
     runtime = db.Column(db.Integer, nullable=False)
+    image = db.Column(db.String, nullable=True)
 
 class Review(db.Model):
     __tablename__ = 'reviews'
