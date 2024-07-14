@@ -40,7 +40,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     
-<script>
+    <script>
         function response_received(response) {
             return response.json(); // Cambia a JSON
         }
@@ -56,7 +56,7 @@
 
                 const card = document.createElement("a");
                 card.setAttribute("class", "card text-decoration-none");
-                card.setAttribute("href", `/movie_detail/?id=${data[index].id_movie}`);
+                card.setAttribute("href", `/movie_detail/index.html?id=${data[index].id_movie}`);
 
                 const image = document.createElement("img");
                 image.setAttribute("class", "card-img-top");
