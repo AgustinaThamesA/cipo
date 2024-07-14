@@ -67,7 +67,7 @@ def reviews_of_a_movie(id_movie):
         print('Error', error)
         return jsonify({'message': 'An error occurred while retrieving reviews'}), 500
 
-"""
+
 @app.route("/movies/<genre>", methods=["GET"])
 def movies_by_genre(genre):
         try:
@@ -92,7 +92,7 @@ def movies_by_genre(genre):
         except Exception as error:
                 print('Error', error)
                 return jsonify({'message': 'There are no movies with this genre...'}), 500
-"""
+
 @app.route("/movies/<id_movie>/new_review", methods=["POST"])
 def create_new_review(id_movie):
     try:
@@ -111,7 +111,7 @@ def create_new_review(id_movie):
         return jsonify({"message": "An error occurred while adding the review."}), 500
 
         
-"""             
+"""       
 @app.route("/movies/<id_movie>/reviews/<id_review>", methods=["DELETE"])
 def delete_review(id_movie, id_review):
     try:
