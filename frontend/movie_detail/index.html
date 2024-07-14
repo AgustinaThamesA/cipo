@@ -84,6 +84,19 @@
                         <p>Score: ${review.score}</p>
                         <p>Comments: ${review.comments}</p>
                         <button class="btn btn-danger" onclick="deleteReview(${id_movie}, ${review.id_review})">Delete Review</button>
+                        <button class="btn btn-primary" onclick="toggleEditForm(${id_movie}, ${review.id_review})">Edit Review</button>
+                        <div id="edit-form-${review.id_review}" class="edit-form mb-4" style="display: none;">
+                            <div class="mb-3">
+                                <input type="text" id="edit_reviewer_name_${review.id_review}" class="form-control" value="${review.reviewer_name}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="number" id="edit_score_${review.id_review}" class="form-control" value="${review.score}" min="1" max="5">
+                            </div>
+                            <div class="mb-3">
+                                <textarea id="edit_comments_${review.id_review}" class="form-control">${review.comments}</textarea>
+                            </div>
+                            <button class="btn btn-success" onclick="submitEditReview(${id_movie}, ${review.id_review})">Submit Changes</button>
+                        </div>
                         <hr>
                     `;
                     reviewsContainer.appendChild(reviewElement);
@@ -98,6 +111,11 @@
         function toggleReviewForm() {
             const reviewForm = document.getElementById("review-form");
             reviewForm.style.display = reviewForm.style.display === "none" ? "block" : "none";
+        }
+
+        function toggleEditForm(id_movie, id_review) {
+            const editForm = document.getElementById(`edit-form-${id_review}`);
+            editForm.style.display = editForm.style.display === "none" ? "block" : "none";
         }
 
         function submitReview() {
@@ -139,6 +157,34 @@
                     window.location.reload();
                 } else {
                     alert("An error occurred while deleting the review.");
+                }
+            })
+            .catch(handle_error);
+        }
+
+        function submitEditReview(id_movie, id_review) {
+            const reviewer_name = document.getElementById(`edit_reviewer_name_${id_review}`).value;
+            const score = document.getElementById(`edit_score_${id_review}`).value;
+            const comments = document.getElementById(`edit_comments_${id_review}`).value;
+
+            fetch(`http://localhost:5000/movies/${id_movie}/reviews/${id_review}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    reviewer_name: reviewer_name,
+                    score: score,
+                    comments: comments
+                })
+            })
+            .then(response_received)
+            .then(data => {
+                if (data.message === "Review updated successfully!") {
+                    alert("Review updated successfully!");
+                    window.location.reload();
+                } else {
+                    alert("An error occurred while updating the review.");
                 }
             })
             .catch(handle_error);
