@@ -38,7 +38,7 @@ def reviews_of_a_movie(id_movie):
         # Obtener la película correspondiente
         movie = db.session.query(Movie).filter(Movie.id_movie == id_movie).first()
         if not movie:
-            return jsonify({'message': 'Movie not found'}), 404
+            return jsonify({'message': 'Movie nott found'}), 404
 
         # Obtener las reseñas de la película
         reviews = db.session.query(Review).filter(Review.id_movie == id_movie).all()
@@ -50,16 +50,24 @@ def reviews_of_a_movie(id_movie):
                 'id_review': review.id_review,
                 'comments': review.comments,
                 'score': review.score,
-                'reviewer_name': review.reviewer_name,
-                'image': movie.image 
+                'reviewer_name': review.reviewer_name
             }
             reviews_data.append(review_data)
 
-        return jsonify(reviews_data)
+        # Preparar la respuesta final
+        movie_data = {
+            'id_movie': movie.id_movie,
+            'image': movie.image,
+            'title': movie.title,
+            'reviews': reviews_data
+        }
+
+        return jsonify(movie_data)
     except Exception as error:
         print('Error', error)
-        return jsonify({'message': 'There are no reviews on this movie...'}), 500
+        return jsonify({'message': 'An error occurred while retrieving reviews'}), 500
 
+"""
 @app.route("/movies/<genre>", methods=["GET"])
 def movies_by_genre(genre):
         try:
@@ -84,7 +92,7 @@ def movies_by_genre(genre):
         except Exception as error:
                 print('Error', error)
                 return jsonify({'message': 'There are no movies with this genre...'}), 500
-
+"""
 @app.route("/movies/<id_movie>/new_review", methods=["POST"])
 def create_new_review(id_movie):
     try:
@@ -103,7 +111,7 @@ def create_new_review(id_movie):
         return jsonify({"message": "An error occurred while adding the review."}), 500
 
         
-                
+"""             
 @app.route("/movies/<id_movie>/reviews/<id_review>", methods=["DELETE"])
 def delete_review(id_movie, id_review):
     try:
@@ -135,7 +143,7 @@ def update_review(id_movie, id_review):
     except Exception as error:
         print('Error:', error)
         return jsonify({"message": "An error occurred while updating the review."}), 500
-
+"""
 
 if __name__ == '__main__':
         app.run(host='0.0.0.0', debug=True, port=port)
