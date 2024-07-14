@@ -11,7 +11,7 @@
 
 a {
     font-family: cursive;
-    color: rgb(46, 46, 14);
+    color: #edebeb;
     text-decoration-color: #edebeb;
 }
 
@@ -22,7 +22,7 @@ body {
     flex-direction: column; 
     justify-content: center;
     align-items: center;
-    background-image: url(https://st3.depositphotos.com/2130737/15041/i/450/depositphotos_150414820-stock-photo-background-and-texture-of-fabric.jpg);
+    background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-colors-of-colorful-light-on-dark-background-wallpaper-hd-the-best-image_2941709.jpg);
     background-size: cover; 
 }
 
@@ -31,13 +31,13 @@ h1 {
     padding: 0;
     font-size: 30px;
     text-align: center;
-    color: rgb(46, 46, 14);
+    color: #edebeb;
     font-family: cursive;
 }
 
 p {
     text-align: center;
-    color: rgb(46, 46, 14);
+    color: #edebeb;
     font-size: 18px;
     margin-top: 10px;
     font-family: cursive;
