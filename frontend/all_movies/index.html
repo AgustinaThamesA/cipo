@@ -112,9 +112,10 @@
         const filter_genre = document.getElementById("filter");
         filter_genre.addEventListener("change", function() { //el navegador detecta el evento y ejecuta function()
             const genre_selected = filter_genre.value;
+            console.log(genre_selected);
             const url = genre_selected ? `http://localhost:5000/movies/${genre_selected}` : `http://localhost:5000/movies`; //elije ruta segun genero
 
-            fetch(url) //el fecth se hace a la ruta del genero seleccionado, si no se selecciona ninguno, el endpoint será /movies, caso contrario será /movies/<genre>
+            fetch(url) //el fetch se hace a la ruta del genero seleccionado, si no se selecciona ninguno, el endpoint será /movies, caso contrario será /movies/<genre>
                 .then(response_received)
                 .then(parse_data)
                 .catch(request_error);
