@@ -14,13 +14,16 @@ a {
     color: rgb(46, 46, 14);
     text-decoration-color: #edebeb;
 }
+
 body {
     margin: 0;
     height: 100vh;
     display: flex;
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
-    background-image: URL(https://st3.depositphotos.com/2130737/15041/i/450/depositphotos_150414820-stock-photo-background-and-texture-of-fabric.jpg);
+    background-image: url(https://st3.depositphotos.com/2130737/15041/i/450/depositphotos_150414820-stock-photo-background-and-texture-of-fabric.jpg);
+    background-size: cover; 
 }
 
 h1 {
@@ -31,3 +34,12 @@ h1 {
     color: rgb(46, 46, 14);
     font-family: cursive;
 }
+
+p {
+    text-align: center;
+    color: rgb(46, 46, 14);
+    font-size: 18px;
+    margin-top: 10px;
+    font-family: cursive;
+}
+
