@@ -24,7 +24,7 @@
                             <img src="" alt="" id="image" class="img-fluid mb-4">
                         </div>
                         <h2 id="title" class="text-center"></h2>
-                        <h3 id="genre" class="text-decoration-underline text-center"></h3>
+                        <h4 id="average" class="text-center"></h4>
                         <div class="text-center mb-4">
                             <button class="btn btn-warning" onclick="toggleReviewForm()">Add Review</button>
                         </div>
@@ -70,7 +70,10 @@
             image.setAttribute("src", movie_data.image);
             
             const title = document.getElementById("title");
-            title.innerText = `Movie ID: ${movie_data.id_movie}`;
+            title.innerText = `${movie_data.title}`;
+
+            const average = document.getElementById("average");
+            average.innerText = `Average score: ${movie_data.average_score}`;
 
             const reviewsContainer = document.getElementById("reviews");
             if (movie_data.reviews.length === 0) {
@@ -80,8 +83,8 @@
                     const reviewElement = document.createElement("div");
                     reviewElement.className = "review mb-3";
                     reviewElement.innerHTML = `
-                        <h5>Review by ${review.reviewer_name}</h5>
-                        <p>Score: ${review.score}</p>
+                        <h4>Review by ${review.reviewer_name}</h4>
+                        <p>Score: ${review.score}/5</p>
                         <p>Comments: ${review.comments}</p>
                         <button class="btn btn-danger" onclick="deleteReview(${id_movie}, ${review.id_review})">Delete Review</button>
                         <button class="btn btn-primary" onclick="toggleEditForm(${id_movie}, ${review.id_review})">Edit Review</button>

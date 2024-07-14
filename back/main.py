@@ -44,6 +44,7 @@ def reviews_of_a_movie(id_movie):
         reviews = db.session.query(Review).filter(Review.id_movie == id_movie).all()
 
         reviews_data = []
+        total_score = 0
         for review in reviews:
             review_data = {
                 'id_movie': review.id_movie,
@@ -53,13 +54,17 @@ def reviews_of_a_movie(id_movie):
                 'reviewer_name': review.reviewer_name
             }
             reviews_data.append(review_data)
+            total_score += review.score
+        
+        average_score = total_score / len(reviews) if reviews else 0
 
         # Preparar la respuesta final
         movie_data = {
             'id_movie': movie.id_movie,
             'image': movie.image,
             'title': movie.title,
-            'reviews': reviews_data
+            'reviews': reviews_data,
+            'average_score': average_score
         }
 
         return jsonify(movie_data)
