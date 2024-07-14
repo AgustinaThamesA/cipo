@@ -21,21 +21,22 @@
         <div class="row g-4" id="movies"></div>
     </div>
 
-    <div>
+    <div class="position-absolute top-0 end-0 m-3">
         <select id="filter">
             <option value="">All genres</option>
-            <option value="Comedia">Comedia</option>
-            <option value="Accion">Accion</option>
+            <option value="Comedia">Comedy</option>
+            <option value="Fantasía">Fantasy</option>
             <option value="Drama">Drama</option>
-            <option value="Infantil">Infantil</option>
+            <option value="Infantil">Children's</option>
         </select>
     </div>
     <style>
         h1 {
             font-family: cursive;
             text-align: center;
-            color: rgb(130, 130, 23);
+            color: #edebeb;
             font-size: 30px;
+            text-shadow: 2px 2px 4px rgba(176, 157, 157, 0.5);
         }
         .card {
             text-decoration: none;
@@ -44,13 +45,14 @@
             padding: 15px;
         }
 
-        select {
+        select#filter {
             font-family: cursive;
             background-color: transparent;
-            color: rgb(130, 130, 23);
+            color: #686464;
             border-radius: 0.5px solid #ccc;
             padding: 4px;
             cursor: pointer;
+            text-shadow: 2px 2px 4px rgba(176, 157, 157, 0.5);
         }
 
     </style>
@@ -63,12 +65,10 @@
         function response_received(response) {
             return response.json();
         }
-
+        const container = document.getElementById("movies");
+        
         function parse_data(data) {
-            console.log("TENGO LA LISTA DE PELICULAS!")
-
-            const container = document.getElementById("movies");
-            container.innerHTML = ""; 
+            container.innerHTML = ""; //limpia el contenido de la página
             for (let index = 0; index < data.length; index++) {
                 const item = document.createElement("div");
                 item.setAttribute("class", "col-6 col-md-4 col-lg-3 col-xl-2");
@@ -110,17 +110,17 @@
         }
 
         const filter_genre = document.getElementById("filter");
-        filter_genre.addEventListener("change", function() {
+        filter_genre.addEventListener("change", function() { //el navegador detecta el evento y ejecuta function()
             const genre_selected = filter_genre.value;
             const url = genre_selected ? `http://localhost:5000/movies/${genre_selected}` : `http://localhost:5000/movies`; //elije ruta segun genero
 
-            fetch(url) //el fecth se hace a la ruta del genero seleccionado
-            .then(response_received)
-            .then(parse_data)
-            .catch(request_error);
+            fetch(url) //el fecth se hace a la ruta del genero seleccionado, si no se selecciona ninguno, el endpoint será /movies, caso contrario será /movies/<genre>
+                .then(response_received)
+                .then(parse_data)
+                .catch(request_error);
         });
-        //si llega acá, se muestran todas las pelis sin filtrar
-        fetch("http://localhost:5000/movies")
+        //muestra todas las peliculas al cargar la pagina por primera vez
+        fetch(`http://localhost:5000/movies`)
             .then(response_received)
             .then(parse_data)
             .catch(request_error);
