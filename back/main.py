@@ -111,7 +111,7 @@ def create_new_review(id_movie):
         return jsonify({"message": "An error occurred while adding the review."}), 500
 
         
-"""       
+      
 @app.route("/movies/<id_movie>/reviews/<id_review>", methods=["DELETE"])
 def delete_review(id_movie, id_review):
     try:
@@ -143,7 +143,7 @@ def update_review(id_movie, id_review):
     except Exception as error:
         print('Error:', error)
         return jsonify({"message": "An error occurred while updating the review."}), 500
-"""
+
 
 if __name__ == '__main__':
         app.run(host='0.0.0.0', debug=True, port=port)
