@@ -21,6 +21,15 @@
         <div class="row g-4" id="movies"></div>
     </div>
 
+    <div>
+        <select id="filter">
+            <option value="">All genres</option>
+            <option value="Comedy">Comedia</option>
+            <option value="Action">Accion</option>
+            <option value="Drama">Drama</option>
+            <option value="Infant">Infantil</option>
+        </select>
+    </div>
     <style>
         h1 {
             font-family: cursive;
@@ -34,6 +43,16 @@
         .card-body {
             padding: 15px;
         }
+
+        select {
+            font-family: cursive;
+            background-color: transparent;
+            color: rgb(130, 130, 23);
+            border-radius: 0.5px solid #ccc;
+            padding: 4px;
+            cursor: pointer;
+        }
+
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -42,14 +61,14 @@
     
     <script>
         function response_received(response) {
-            return response.json(); // Cambia a JSON
+            return response.json();
         }
 
         function parse_data(data) {
             console.log("TENGO LA LISTA DE PELICULAS!")
 
             const container = document.getElementById("movies");
-            container.innerHTML = ""; // Limpiar el contenedor antes de agregar nuevos datos
+            container.innerHTML = ""; 
             for (let index = 0; index < data.length; index++) {
                 const item = document.createElement("div");
                 item.setAttribute("class", "col-6 col-md-4 col-lg-3 col-xl-2");
@@ -90,6 +109,17 @@
             console.log("ERROR", error);
         }
 
+        const filter_genre = document.getElementById("filter");
+        filter_genre.addEventListener("change", function() {
+            const genre_selected = filter_genre.value;
+            const url = genre_selected ? `http://localhost:5000/movies/${genre_selected}` : `http://localhost:5000/movies`; //elije ruta segun genero
+
+            fetch(url) //el fecth se hace a la ruta del genero seleccionado
+            .then(response_received)
+            .then(parse_data)
+            .catch(request_error);
+        });
+        //si llega acá, se muestran todas las pelis sin filtrar
         fetch("http://localhost:5000/movies")
             .then(response_received)
             .then(parse_data)
