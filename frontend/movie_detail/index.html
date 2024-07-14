@@ -83,6 +83,7 @@
                         <h5>Review by ${review.reviewer_name}</h5>
                         <p>Score: ${review.score}</p>
                         <p>Comments: ${review.comments}</p>
+                        <button class="btn btn-danger" onclick="deleteReview(${id_movie}, ${review.id_review})">Delete Review</button>
                         <hr>
                     `;
                     reviewsContainer.appendChild(reviewElement);
@@ -122,6 +123,22 @@
                     window.location.reload();
                 } else {
                     alert("An error occurred while adding the review.");
+                }
+            })
+            .catch(handle_error);
+        }
+
+        function deleteReview(id_movie, id_review) {
+            fetch(`http://localhost:5000/movies/${id_movie}/reviews/${id_review}`, {
+                method: "DELETE"
+            })
+            .then(response_received)
+            .then(data => {
+                if (data.message === "Review deleted successfully!") {
+                    alert("Review deleted successfully!");
+                    window.location.reload();
+                } else {
+                    alert("An error occurred while deleting the review.");
                 }
             })
             .catch(handle_error);
