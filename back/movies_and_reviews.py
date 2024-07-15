@@ -9,7 +9,7 @@ load_dotenv()  # Cargar variables de entorno desde el archivo .env
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+ 
 CORS(app)
 
 db = SQLAlchemy(app)

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, session, current_app, redirect
+from flask import Flask, request, jsonify, session
 from movies_and_reviews import db, app, Movie, Review
 from flask_cors import CORS
 
