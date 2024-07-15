@@ -31,3 +31,5 @@ http-server -p 3000
 ## Database use
 
 We have the database information inside 'mi_base_de_datos_backup.sql' so you can create both tables and also download the information of the movies. There are no reviews in that file so no movie would have a review initially. Don't worry, people would submit them for you!
+
+## Click here to go to IntroMovies: http://127.0.0.1:5500/frontend/
