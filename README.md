@@ -1,10 +1,10 @@
-# IntroMovies by Cipo Team
+# **IntroMovies by Cipo Team**
 
-## Click here to go to IntroMovies: http://127.0.0.1:5500/frontend/
+## **Click here to go to IntroMovies**: http://127.0.0.1:5500/frontend/
 
 ---
 
-## Install
+## **Install**
 
 ```bash
 python3 -m venv venv
@@ -12,7 +12,7 @@ source venv/bin/activate
 pip install flask
 ```
 
-## Run back part
+## **Run back part**
 
 First, change to the directory where the path 'cipo' is
 
@@ -56,10 +56,10 @@ We use database session querys to add, update and delete reviews. Also we implem
 Flask Server Functions for Movie and Review Management
 
 #### list_of_movies()
-Route: /movies
-Method: GET
-Description: Retrieves the list of all available movies from the database.
-Returns: A JSON with the information of all movies or an error message if no movies are available.
+Route: /movies  
+Method: GET  
+Description: Retrieves the list of all available movies from the database.  
+Returns: A JSON with the information of all movies or an error message if no movies are available.  
 
 #### reviews_of_a_movie(id_movie)
 Route: /movies/<id_movie>/reviews
